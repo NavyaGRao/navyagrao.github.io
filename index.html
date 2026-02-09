@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar | Full Stack Sandwiches</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Fira Code for the 'Dev' feel, Inter for readability -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ide: {
+                            bg: '#1e1e1e',
+                            sidebar: '#252526',
+                            accent: '#FACC15',   /* Primary: Yellow */
+                            string: '#F472B6',   /* Secondary: Pink */
+                            keyword: '#FACC15',  /* Primary: Yellow */
+                            function: '#F472B6', /* Secondary: Pink */
+                            comment: '#6a9955',
+                            text: '#d4d4d4'
+                        }
+                    },
+                    fontFamily: {
+                        mono: ['"Fira Code"', 'monospace'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar for that code editor feel */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e1e1e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #444;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+        }
+        
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .code-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .code-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            border-color: #FACC15; /* Primary Yellow Hover Border */
+        }
+    </style>
+</head>
+<body class="bg-ide-bg text-ide-text font-sans antialiased selection:bg-ide-keyword selection:text-gray-900">
+
+    <!-- Navigation Bar (Literally the Navbar) -->
+    <nav class="fixed w-full z-50 bg-ide-sidebar border-b border-gray-700 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-ide-keyword font-mono text-xl font-bold">&lt;Navbar /&gt;</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8 font-mono text-sm">
+                        <a href="#home" class="hover:text-white px-3 py-2 rounded-md transition-colors text-ide-keyword">./home</a>
+                        <a href="#menu" class="text-gray-300 hover:text-white px-3 py-2 rounded-md transition-colors">./menu</a>
+                        <a href="#about" class="text-gray-300 hover:text-white px-3 py-2 rounded-md transition-colors">./about</a>
+                        <a href="#contact" class="bg-ide-accent text-gray-900 font-bold px-4 py-2 rounded hover:bg-yellow-500 transition-colors">contact()</a>
+                    </div>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden bg-ide-sidebar border-b border-gray-700" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 font-mono">
+                <a href="#home" class="mobile-link text-white block px-3 py-2 rounded-md text-base font-medium">./home</a>
+                <a href="#menu" class="mobile-link text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">./menu</a>
+                <a href="#about" class="mobile-link text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">./about</a>
+                <a href="#contact" class="mobile-link text-ide-keyword hover:text-yellow-300 block px-3 py-2 rounded-md text-base font-medium">./contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col items-center text-center">
+        <div class="inline-block p-2 rounded bg-gray-800 border border-gray-700 mb-6 animate-pulse">
+            <code class="text-ide-comment font-mono text-sm">// Now serving: v1.0.0</code>
+        </div>
+        <!-- Adjusted text size for mobile -->
+        <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight mb-6 font-mono">
+            <span class="text-ide-keyword">sudo make</span> <span class="text-ide-string">"sandwich"</span>
+        </h1>
+        <p class="mt-4 text-lg sm:text-xl text-gray-400 max-w-2xl font-light">
+            Vegetarian & Vegan creations compiled to perfection. <br class="hidden sm:block">
+            Because great code requires great fuel.
+        </p>
+        <!-- Stack buttons on mobile, row on desktop -->
+        <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto">
+            <a href="#menu" class="px-8 py-3 bg-ide-keyword text-gray-900 font-bold font-mono rounded hover:bg-yellow-500 active:scale-95 transition-all shadow-[0_0_15px_rgba(250,204,21,0.3)] text-center">
+                view_menu()
+            </a>
+            <a href="#contact" class="px-8 py-3 border border-gray-600 text-gray-300 font-mono rounded hover:border-white hover:text-white active:scale-95 transition-all text-center">
+                catering_inquiry()
+            </a>
+        </div>
+    </header>
+
+    <!-- About Snippet -->
+    <section id="about" class="py-12 bg-ide-sidebar border-y border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <i class="fas fa-terminal text-4xl text-ide-comment mb-4"></i>
+            <h2 class="text-2xl font-bold font-mono text-white mb-4">About the Developer</h2>
+            <p class="text-gray-400 max-w-3xl mx-auto text-sm sm:text-base">
+                Founded by an ex-computer engineer, <strong>Navbar</strong> is designed for those who appreciate structure, logic, and flavor. 
+                We've swapped microchips for mushrooms and hardware for halloumi to build the ultimate plant-based stack.
+            </p>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <main id="menu" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-2xl sm:text-3xl font-bold font-mono text-white break-all">
+                <span class="text-ide-keyword">const</span> <span class="text-ide-function">Menu</span> = [
+            </h2>
+            <p class="text-ide-comment font-mono mt-2 text-sm sm:text-base">// All items are strictly typed as Vegetarian or Vegan</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+
+            <!-- Item 1 -->
+            <div class="code-card bg-ide-sidebar border border-gray-700 rounded-lg p-4 sm:p-6 relative overflow-hidden group">
+                <div class="absolute top-0 right-0 bg-ide-comment text-white text-xs font-mono px-2 py-1 rounded-bl">Veg</div>
+                <h3 class="text-lg sm:text-xl font-bold text-ide-function font-mono mb-4">The Umami Mushroom</h3>
+                <div class="space-y-3 font-mono text-xs sm:text-sm">
+                    <div>
+                        <span class="text-ide-keyword">protein:</span> 
+                        <span class="text-ide-string">"Savory Roasted Mushrooms"</span>,
+                    </div>
+                    <div>
+                        <span class="text-ide-keyword">toppings:</span> 
+                        <span class="text-ide-text">[ "Creamy Havarti", "Tangy Feta", "Fresh Arugula" ]</span>,
+                    </div>
+                    <div>
+                        <span class="text-ide-keyword">sauce:</span> 
+                        <span class="text-ide-string">"Sundried Tomato Aioli"</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="code-card bg-ide-sidebar border border-gray-700 rounded-lg p-4 sm:p-6 relative overflow-hidden group">
+                <div class="absolute top-0 right-0 bg-ide-comment text-white text-xs font-mono px-2 py-1 rounded-bl">Veg</div>
+                <h3 class="text-lg sm:text-xl font-bold text-ide-function font-mono mb-4">Mediterranean Halloumi</h3>
+                <div class="space-y-3 font-mono text-xs sm:text-sm">
+                    <div>
+                        <span class="text-ide-keyword">protein:</span> 
+                        <span class="text-ide-string">"Grilled Halloumi Cheese"</span>,
+                    </div>
+                    <div>
+                        <span class="text-ide-keyword">toppings:</span> 
+                        <span class="text-ide-text">[ "Grilled Sweet Peppers", "Zucchini", "Red Cabbage Slaw" ]</span>,
+                    </div>
+                    <div>
+                        <span class="text-ide-keyword">sauce:</span> 
+                        <span class="text-ide-string">"Roasted Red Pepper Sauce"</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="code-card bg-ide-sidebar border border-gray-700 rounded-lg p-4 sm:p-6 relative overflow-hidden group">
+                <div class="absolute top-0 right-0 bg-green-600 text-white text-xs font-mono px-2 py-1 rounded-bl">Vegan</div>
+                <h3 class="text-lg sm:text-xl font-bold text-ide-function font-mono mb-4">The Spicy Tofu Crunch</h3>
+                <div class="space-y-3 font-mono text-xs sm:text-sm">
+                    <div>
+                        <span class="text-ide-keyword">protein:</span> 
+                        <span class="text-ide-string">"Crispy Breaded Tofu"</span>,
+                    </div>
+                    <div>
+                        <span class="text-ide-keyword">toppings:</span> 
+                        <span class="text-ide-text">[ "Zesty Pickles", "Red Cabbage Slaw" ]</span>,
+                    </div>
+                    <div>
+                        <span class="text-ide-keyword">sauce:</span> 
+                        <span class="text-ide-string">"Frank's Red Hot Aioli + Spice Dust"</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="code-card bg-ide-sidebar border border-gray-700 rounded-lg p-4 sm:p-6 relative overflow-hidden group">
+                <div class="absolute top-0 right-0 bg-ide-comment text-white text-xs font-mono px-2 py-1 rounded-bl">Veg</div>
+                <h3 class="text-lg sm:text-xl font-bold text-ide-function font-mono mb-4">Eggplant Caprese Crisp</h3>
+                <div class="space-y-3 font-mono text-xs sm:text-sm">
+                    <div>
+                        <span class="text-ide-keyword">protein:</span> 
+                        <span class="text-ide-string">"Golden Breaded Eggplant"</span>,
+                    </div>
+                    <div>
+                        <span class="text-ide-keyword">toppings:</span> 
+                        <span class="text-ide-text">[ "Soft Mozzarella", "Roasted Red Peppers", "Arugula" ]</span>,
+                    </div>
+                    <div>
+                        <span class="text-ide-keyword">sauce:</span> 
+                        <span class="text-ide-string">"Rich Tomato Confit + Balsamic"</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="code-card bg-ide-sidebar border border-gray-700 rounded-lg p-4 sm:p-6 relative overflow-hidden group">
+                <div class="absolute top-0 right-0 bg-ide-comment text-white text-xs font-mono px-2 py-1 rounded-bl">Veg</div>
+                <h3 class="text-lg sm:text-xl font-bold text-ide-function font-mono mb-4">The Classic Caprese</h3>
+                <div class="space-y-3 font-mono text-xs sm:text-sm">
+                    <div>
+                        <span class="text-ide-keyword">protein:</span> 
+                        <span class="text-ide-string">"Fresh Soft Mozzarella"</span>,
+                    </div>
+                    <div>
+                        <span class="text-ide-keyword">toppings:</span> 
+                        <span class="text-ide-text">[ "Marinated Tomatoes", "Red Peppers", "Arugula" ]</span>,
+                    </div>
+                    <div>
+                        <span class="text-ide-keyword">sauce:</span> 
+                        <span class="text-ide-string">"Basil Aioli + Balsamic"</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coming Soon Card -->
+            <div class="border-2 border-dashed border-gray-700 rounded-lg p-4 sm:p-6 flex flex-col items-center justify-center text-center opacity-70">
+                <i class="fas fa-plus-circle text-3xl text-gray-500 mb-2"></i>
+                <h3 class="text-lg font-mono text-gray-400">Todo: New Dish</h3>
+                <p class="text-xs text-gray-500 mt-2">Have a request? Submit a pull request below.</p>
+            </div>
+
+        </div>
+        
+        <div class="text-center mt-12">
+            <h2 class="text-3xl font-bold font-mono text-white">
+                ];
+            </h2>
+        </div>
+    </main>
+
+    <!-- Stats Section -->
+    <!-- Using a gap-based grid approach for perfect responsive borders -->
+    <section class="border-y border-gray-700 bg-gray-700 gap-px grid grid-cols-2 md:grid-cols-4">
+        <div class="p-8 text-center bg-[#1e1e1e]">
+            <div class="text-3xl font-bold text-ide-keyword font-mono">100%</div>
+            <div class="text-sm text-gray-400 mt-1">Meat Free</div>
+        </div>
+        <div class="p-8 text-center bg-[#1e1e1e]">
+            <div class="text-3xl font-bold text-ide-string font-mono">5</div>
+            <div class="text-sm text-gray-400 mt-1">Core Modules</div>
+        </div>
+        <div class="p-8 text-center bg-[#1e1e1e]">
+            <div class="text-3xl font-bold text-ide-function font-mono">&infin;</div>
+            <div class="text-sm text-gray-400 mt-1">Flavor Loops</div>
+        </div>
+        <div class="p-8 text-center bg-[#1e1e1e]">
+            <div class="text-3xl font-bold text-ide-comment font-mono">0</div>
+            <div class="text-sm text-gray-400 mt-1">Bugs</div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
+        <div class="bg-ide-sidebar p-6 sm:p-8 rounded-lg border border-gray-700 shadow-2xl">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                <span class="ml-2 font-mono text-sm text-gray-400">inquiry_form.js</span>
+            </div>
+            
+            <h2 class="text-2xl font-bold font-mono text-white mb-2">Initialize Contact</h2>
+            <p class="text-gray-400 mb-8 text-sm">Open for catering requests, bug reports, or feature requests (new dishes).</p>
+
+            <form id="contactForm" class="space-y-6" action="https://api.sheetmonkey.io/form/2FN7h1Lr41aipEkZYXnun3" method="post">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium font-mono text-ide-keyword mb-2">var name =</label>
+                        <input type="text" name="Name" required placeholder='"Your Name"' 
+                            class="w-full bg-[#1e1e1e] border border-gray-600 rounded text-ide-string px-4 py-2 focus:outline-none focus:border-ide-keyword font-mono placeholder-gray-600">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium font-mono text-ide-keyword mb-2">var email =</label>
+                        <input type="email" name="Email" required placeholder='"you@example.com"' 
+                            class="w-full bg-[#1e1e1e] border border-gray-600 rounded text-ide-string px-4 py-2 focus:outline-none focus:border-ide-keyword font-mono placeholder-gray-600">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium font-mono text-ide-keyword mb-2">const inquiryType =</label>
+                    <select name="MessageType"
+                        class="w-full bg-[#1e1e1e] border border-gray-600 rounded text-ide-string px-4 py-2 focus:outline-none focus:border-ide-keyword font-mono">
+                        <option value="catering">"Catering Request"</option>
+                        <option value="dish_request">"New Dish Idea / Feature Request"</option>
+                        <option value="general">"General Inquiry"</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium font-mono text-ide-keyword mb-2">function message() {</label>
+                    <textarea name="Message" rows="4" required placeholder="// Type your message here..." 
+                        class="w-full bg-[#1e1e1e] border border-gray-600 rounded text-gray-300 px-4 py-2 focus:outline-none focus:border-ide-keyword font-mono placeholder-gray-600"></textarea>
+                    <div class="text-left text-sm font-mono text-ide-keyword mt-1">}</div>
+                </div>
+
+                <input type="hidden" name="Created" value="x-sheetmonkey-current-date-time" />
+
+                <button type="submit" value="Save Responses"
+                    class="w-full bg-ide-accent text-gray-900 font-mono font-bold py-3 rounded hover:bg-yellow-500 transition-colors flex items-center justify-center gap-2 active:scale-95 transform">
+                    <i class="fas fa-paper-plane"></i> Submit Query
+                </button>
+            </form>
+            
+            <!-- Success Message (Hidden by default) -->
+            <div id="successMessage" class="hidden mt-6 bg-[#1e1e1e] border border-green-500 rounded p-4">
+                <p class="text-green-500 font-mono text-center">
+                    <i class="fas fa-check-circle mr-2"></i> Request received. Status: 200 OK.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-ide-sidebar border-t border-gray-700 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <div class="mb-4 md:mb-0">
+                <span class="text-ide-keyword font-mono font-bold text-lg">&lt;Navbar /&gt;</span>
+                <p class="text-gray-500 text-sm mt-1 font-mono">Est. 2026. No meat, just byte.</p>
+            </div>
+            
+            <div class="flex space-x-6 justify-center md:justify-end">
+                <!-- <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-github fa-lg"></i></a> -->
+                <a href="https://www.instagram.com/navya.cooks.bubbles.shooks/" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-instagram fa-lg"></i></a>
+                <!-- <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-twitter fa-lg"></i></a> -->
+            </div>
+        </div>
+        <div class="text-center mt-8 text-gray-600 text-xs font-mono">
+            &copy; 2026 Navbar Eatery. All rights reserved. <br>
+            <span class="text-gray-700">Powered by HTML, CSS & Caffeine.</span>
+        </div>
+    </footer>
+
+</body>
+</html>
